@@ -2,7 +2,8 @@ FROM openjdk:jdk-alpine
 MAINTAINER Oliver Meyer <mail@iskaron.de>
 
 RUN apk update && apk add ca-certificates wget && update-ca-certificates && apk upgrade && \
-    apk add --no-cache bash git openssh
+    apk add --no-cache bash git openssh && \
+    rm -rf /tmp/* && rm -rf /var/cache/apk/*
 
 ENV MINECRAFT_VERSION=1.12.2
 
@@ -12,10 +13,11 @@ RUN mkdir /build /minecraft /data && cd /build && \
 	cp spigot-$MINECRAFT_VERSION.jar /minecraft/spigot.jar && \
 	cd /minecraft && rm -rf /build
 
-RUN /usr/sbin/useradd -s /bin/bash -d /minecraft -m minecraft && \
+RUN addgroup -g 1000 minecraft && adduser -D -G minecraft -s /bin/bash -u 1000 minecraft && \
 	chown -R minecraft /minecraft /data
 
-RUN apk remove git openssh
+RUN apk del git openssh && \
+    rm -rf /tmp/* && rm -rf /var/cache/apk/*
 
 EXPOSE 25566/tcp
 EXPOSE 8123/tcp
