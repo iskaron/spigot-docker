@@ -17,6 +17,9 @@ RUN /usr/sbin/useradd -s /bin/bash -d /minecraft -m minecraft && \
 
 RUN apk remove git openssh
 
+EXPOSE 25566/tcp
+EXPOSE 8123/tcp
+
 USER minecraft
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT /docker-entrypoint.sh
