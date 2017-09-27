@@ -24,5 +24,6 @@ EXPOSE 8123/tcp
 
 USER minecraft
 ADD docker-entrypoint.sh /docker-entrypoint.sh
+ADD rcon /bin/rcon
 ENTRYPOINT /docker-entrypoint.sh
 
