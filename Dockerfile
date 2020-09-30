@@ -5,7 +5,7 @@ RUN apk update && apk add ca-certificates wget && update-ca-certificates && apk 
     apk add --no-cache bash git openssh && \
     rm -rf /tmp/* && rm -rf /var/cache/apk/*
 
-ENV MINECRAFT_VERSION=1.12.2
+ENV MINECRAFT_VERSION=1.16.3
 
 RUN mkdir /build /minecraft /data && cd /build && \
 	wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar && \
